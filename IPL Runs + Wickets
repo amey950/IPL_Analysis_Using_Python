@@ -72,4 +72,11 @@ run out                     893
 lbw                         571
 stumped                     294
 ----------------------------------------------------------------------------------------------------
-11) 
+11) FIND THE 3 TEAMS AGAINST WHICH VIRAT KOHLI HAS SCORED HIGHEST RUNS
+
+df_p[df_p['batsman'] == 'V Kohli']
+df_p.groupby('bowling_team')['batsman_runs'].sum().sort_values(ascending = False).head(3)
+
+Mumbai Indians                 29442
+Royal Challengers Bangalore    28926
+Kings XI Punjab                28860
