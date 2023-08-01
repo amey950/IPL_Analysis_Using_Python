@@ -1,0 +1,75 @@
+
+1) total matches : 816
+
+print(df_p['id'].nunique())
+----------------------------------------------------------------------------------------------------
+2) find the unique teams which are present in data set
+
+print(df_p['batting_team'].unique())
+----------------------------------------------------------------------------------------------------
+3) create special different data frame containing boundry runs only
+
+df_p['batsman_runs'].between(4,6)
+----------------------------------------------------------------------------------------------------
+4) how many boundry i.e 4s and 6s are there in entire data set
+
+df_p['batsman_runs'].between(4,6)
+df_p.shape[0]
+----------------------------------------------------------------------------------------------------
+5) give the top 5 batsman and their total boundry count
+
+aa = df_p[df_p['batsman_runs'].between(4,6)]
+aa.value_counts('batsman').head(5)
+
+CH Gayle     733
+V Kohli      706
+DA Warner    706
+S Dhawan     702
+SK Raina     688
+
+----------------------------------------------------------------------------------------------------
+6) find the team which has scored maximum boundries and fetch top 5
+
+aa = df_p[df_p['batsman_runs'].between(4,6)]
+aa.value_counts('batting_team').head(5)
+
+Mumbai Indians                 4045
+Royal Challengers Bangalore    3734
+Kings XI Punjab                3705
+Kolkata Knight Riders          3648
+Chennai Super Kings            3429
+----------------------------------------------------------------------------------------------------
+7)find the top 10 batsman with highest runs
+
+aa = df_p.groupby('batsman')['batsman_runs'].sum()
+aa.sort_values(ascending = False).head(10)
+----------------------------------------------------------------------------------------------------
+8) give the top 5 bowlers with highrest wickets
+
+aa = df_p[df_p['is_wicket'] == 1]
+aa.value_counts('bowler').head(5)
+----------------------------------------------------------------------------------------------------
+9) give the most expensive bowlers in terms of boundries
+
+aa = df_p[df_p['batsman_runs'].between(4,6)]
+bb = aa.value_counts('bowler') ;
+bb
+
+UT Yadav            510
+PP Chawla           498
+DJ Bravo            444
+P Kumar             443
+Harbhajan Singh     431
+----------------------------------------------------------------------------------------------------
+10) different types of ways batsman got out
+
+a = df_p.value_counts('dismissal_kind')
+a.head(5)
+
+caught                     5743
+bowled                     1700
+run out                     893
+lbw                         571
+stumped                     294
+----------------------------------------------------------------------------------------------------
+11) 
