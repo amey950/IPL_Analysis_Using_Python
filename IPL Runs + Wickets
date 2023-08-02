@@ -87,3 +87,73 @@ Kings XI Punjab                28860
 
 df_p.groupby(['id','batsman'])['batsman_runs'].sum()
 
+----------------------------------------------------------------------------------------------------
+
+13) FIND THE TOP 5 BOWLERS WHO HAVE GIVEN MOST EXTRA RUNS
+
+a = df_p[df_p['extra_runs'].between (1,6)]
+a.value_counts('bowler').head(5)
+
+SL Malinga    220
+UT Yadav      185
+P Kumar       185
+DJ Bravo      185
+B Kumar       166
+----------------------------------------------------------------------------------------------------
+
+Q) WHICH TEAM HAS GIVEN HIGHEST NUMBER OF BOUNDRIES GIVE TOP 5 TEAMS AND THEIR COUNT OF BOUNDRIES 
+
+a = df_p[(df_p['total_runs'] == 6 )| (df_p['total_runs'] == 4)]
+a.value_counts('bowling_team').head(5)
+
+Kings XI Punjab                3832
+Mumbai Indians                 3786
+Royal Challengers Bangalore    3761
+Kolkata Knight Riders          3605
+Chennai Super Kings            3306
+
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE NUMBER OF GAMES PLAYED BY CSK I.E. , Chennai Super Kings
+
+a = df_p[df_p['batting_team'] == 'Chennai Super Kings']
+a['id'].nunique()
+
+ans : 178 games
+----------------------------------------------------------------------------------------------------
+
+Q) FIND NAMES OF ALL THE TEAMS PLAYING IN THE IPL 
+
+a = df_p['batting_team']
+a.unique()
+
+----------------------------------------------------------------------------------------------------
+
+Q) TOP 10 INNINGS OF VIRAT KOHLI , SCORE AND BOWLING TEAM 
+
+a = df_p[df_p['batsman'] == 'V Kohli']
+b = a.groupby(['id', 'batsman', 'bowling_team'])['batsman_runs'].sum().sort_values(ascending = False).head(10)
+
+980999   V Kohli  Kings XI Punjab            113
+980987   V Kohli  Gujarat Lions              109
+980969   V Kohli  Rising Pune Supergiants    108
+980937   V Kohli  Gujarat Lions              100
+1178410  V Kohli  Kolkata Knight Riders      100
+598054   V Kohli  Delhi Daredevils            99
+598048   V Kohli  Sunrisers Hyderabad         93
+1136574  V Kohli  Mumbai Indians              92
+1216525  V Kohli  Chennai Super Kings         90
+1175372  V Kohli  Kolkata Knight Riders       84
+
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE AVERAGE OF V KOHLI
+
+aa = df_p[df_p['batsman'] == 'V Kohli']
+matches = aa['id'].nunique()
+runs = aa['batsman_runs'].sum()
+
+print(runs/matches)   /* IT IS 31.5 */ 
+----------------------------------------------------------------------------------------------------
+
+
