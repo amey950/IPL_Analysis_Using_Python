@@ -156,4 +156,43 @@ runs = aa['batsman_runs'].sum()
 print(runs/matches)   /* IT IS 31.5 */ 
 ----------------------------------------------------------------------------------------------------
 
+Q) FIND THE MEDIAN  OF THE V KOHLI'S RUNS
+
+import numpy as np
+a = df_p[df_p['batsman'] == 'V Kohli']       /* masking aka filtering */ 
+b = a.groupby(['id','batsman'])['batsman_runs'].sum()    /* grouping by */ 
+z = b.values               /* series data type and considering values */
+print(np.median(z))     /* printing the median */ 
+
+----------------------------------------------------------------------------------------------------
+
+Q) WHICH BOWLING TEAM HAS GIVEN HIGHEST 6s PICK TOP 5
+
+aa = df_p[(df_p['batsman_runs'] == 6) | (df_p['batsman_runs'] == 4)]
+aa.value_counts('bowling_team').head(5)
+
+Kings XI Punjab                3807
+Mumbai Indians                 3752
+Royal Challengers Bangalore    3729
+Kolkata Knight Riders          3577
+Chennai Super Kings            3283
+
+----------------------------------------------------------------------------------------------------
+Q) FIND THE TOTAL RUNS SCORED BY  V Kohli
+
+aa = df_p.groupby(['batsman'])['batsman_runs'].sum().sort_values(ascending = False)
+aa['V Kohli']
+
+/* here in 2nd line you can replace name of any player and answer will be present */
+
+-------------------------------------------------------------------------------
+
+Q)  WRITE A CODE TO FIND THE HOW MANY TIME KOHLI HAS SCORED MORE THAN 90 RUNS
+
+aa = df_p.groupby(['batsman','id'])['batsman_runs'].sum()
+k = aa['V Kohli']
+k[k.values > 90].count()
+
+/* HERE WE CAN CHANGE THE NAME OF BATSMAN AND CHANGE THE SCORE , IT IS JUST REPLACEMENT IN ABOVE CODE */ 
+
 
