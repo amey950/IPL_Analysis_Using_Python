@@ -1,0 +1,189 @@
+Q) FIND THE TOTAL NUMBETR OF MATCHES PLAYED 
+
+print(df_p['id'].nunique());    /* HERE ID IS PRIMARY KEY , DENOTING EACH SINGLE MATCH */
+
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 5 CITIES WHERE MOST MATCHES WERE HELD 
+
+print(df_p['city'].value_counts().head(5));
+
+Mumbai       101
+Kolkata       77
+Delhi         74
+Bangalore     65
+Hyderabad     64
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 5 STADIUMS WHERE MOST MATCHES WERE HELD
+
+print(df_p['venue'].value_counts().head(5))
+
+print(df_p['venue'].value_counts().head(5))
+Eden Gardens                                 77
+Feroz Shah Kotla                             74
+Wankhede Stadium                             73
+M Chinnaswamy Stadium                        65
+Rajiv Gandhi International Stadium, Uppal    64
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE CITIES WHICH HAVE MORE THAN 1 STADIUM 
+
+aa = df_p.groupby('city')['venue'].nunique().sort_values(ascending = False)
+aa[aa.values > 1]
+
+Mumbai        3
+NA            2
+Pune          2
+Chandigarh    2
+
+------------------------------------------------------------------------------------------------
+
+Q) GET TOP 5 TEAMS WITH HIGHEST MATCHES PLAYED
+
+(df_p.value_counts('team1') + df_p.value_counts('team2')).sort_values(ascending = False).head(5)
+
+Mumbai Indians                 203
+Royal Challengers Bangalore    195
+Kolkata Knight Riders          192
+Kings XI Punjab                190
+Chennai Super Kings            178
+
+------------------------------------------------------------------------------------------------
+
+Q) GET THE 5 TEAMS WITH LOWEST MATCHES PLAYED 
+
+(df_p.value_counts('team1') + df_p.value_counts('team2')).sort_values(ascending = False).tail(5)
+
+Delhi Capitals             33
+Gujarat Lions              30
+Rising Pune Supergiant     16
+Kochi Tuskers Kerala       14
+Rising Pune Supergiants    14
+
+------------------------------------------------------------------------------------------------
+Q)  FIND THE TOP 5 PLAYERS WITH HIGHEST MAN OF THE MATCH AWARDS
+
+print(df_p['player_of_match'].value_counts().head(5))
+
+AB de Villiers    23
+CH Gayle          22
+RG Sharma         18
+DA Warner         17
+MS Dhoni          17
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE WINNING PERCENTAGE OF 'Mumbai Indians'
+
+a = df_p[(df_p['team1'] == 'Mumbai Indians') | (df_p['team2'] == 'Mumbai Indians')]
+b = a[a['winner'] == 'Mumbai Indians']
+
+print(len(b)/ len(a)*100)        /* it is nearly 60 percent */ 
+
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 5 SPOTS WHERE MAXIMUM NUMBER OF GAME WERE PLAYED. HERE SPOTS = VENUE+CITY
+
+print(df_p[['city','venue']].value_counts().head(5))
+
+Kolkata    Eden Gardens                                 77
+Delhi      Feroz Shah Kotla                             74
+Mumbai     Wankhede Stadium                             73
+Bangalore  M Chinnaswamy Stadium                        65
+Hyderabad  Rajiv Gandhi International Stadium, Uppal    64
+
+------------------------------------------------------------------------------------------------
+Q) WRITE A CODE WHERE ONE CAN ENTER THE CITY AND YOU WILL GET ALL GROUNDS AND MATCHES PLAYED ON THOSE GROUNDS
+
+aa = df_p[['city','venue']].value_counts()
+aa['Mumbai']                                    /* here you can entre name of city */
+
+Wankhede Stadium              73
+Dr DY Patil Sports Academy    17
+Brabourne Stadium             11
+------------------------------------------------------------------------------------------------
+
+Q) FIND MANY TIMES MS DHONI HAVE RECEIVED MAN OF THE MATCH AWARD
+
+len(df_p[df_p['player_of_match'] == 'MS Dhoni'])          /* 17 TIMES */
+
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 5 TEAMS WHO HAVE MAXIMUM NUMBER OF WINS
+
+df_p['winner'].value_counts().head(5)
+
+Mumbai Indians                 120
+Chennai Super Kings            106
+Kolkata Knight Riders           99
+Royal Challengers Bangalore     91
+Kings XI Punjab                 88
+
+------------------------------------------------------------------------------------------------
+
+Q) WHICH TEAMS ARE BEST AT CHASING RUNS SUCCESSFULLY , MENTION TOP 3 TEAMS WITH WIN COUNTS WHILE CHASING
+
+a = df_p[df_p['result'] == 'wickets']
+a['winner'].value_counts().head(3)
+
+Kolkata Knight Riders          57
+Mumbai Indians                 56
+Chennai Super Kings            53
+
+------------------------------------------------------------------------------------------------
+
+Q) FIND THE WINNERS WHO HAVE WON WITH MARGIN OF RUNS LESS THAN 5 RUNS
+
+a = df_p[(df_p['result'] == 'runs') & (df_p['result_margin'] < 5.0)]
+a['winner'].value_counts().head(4)
+
+Kings XI Punjab                7
+Mumbai Indians                 6
+Chennai Super Kings            5
+Royal Challengers Bangalore    5
+--------------------------------------------------------------------------------------------------
+
+Q) FINDS THE INFO FOR Chennai TEAM WINNING THE MATCH LESS THAN 5 RUNS 
+
+a = df_p[(df_p['result'] == 'runs') & (df_p['result_margin'] < 5.0)]
+z = a[a['winner'] == 'Chennai Super Kings']                               /* you can change team name here */
+z[['team1','team2','winner','result_margin','date']]  
+
+team1	team2	winner	result_margin	date
+43	Kolkata Knight Riders	Chennai Super Kings	Chennai Super Kings	3.0	2008-05-18
+175	Chennai Super Kings	Kolkata Knight Riders	Chennai Super Kings	2.0	2011-04-08
+459	Chennai Super Kings	Delhi Daredevils	Chennai Super Kings	1.0	2015-04-09
+487	Chennai Super Kings	Kolkata Knight Riders	Chennai Super Kings	2.0	2015-04-28
+655	Sunrisers Hyderabad	Chennai Super Kings	Chennai Super Kings	4.0	2018-04-22
+
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE PERCENTAGE OF MATCHES WHERE TOSS WINNER WON THE MATCH
+
+a = df_p[df_p['toss_winner'] == df_p['winner']]
+b = df_p['id'].nunique()
+
+print((len(a)/b)*100)              /* nearly 51 percent */ 
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE HOW MANY TIME TEAM WON TOSS AND ALSO WON THE MATCH WHILE CHOOSING BAT
+
+a = df_p[df_p['toss_winner'] == df_p['winner']]
+print(a['toss_decision'].value_counts())
+
+field    273
+bat      145
+
+----------------------------------------------------------------------------------------------------
+
+Q) FIND TOSS DECISION ANALYSIS OF Mumbai Indians WHEN TEAM WON MATCH AND WON TOSS
+
+a = df_p[df_p['toss_winner'] == df_p['winner']]
+b = a[a['winner'] == 'Mumbai Indians']
+print(b['toss_decision'].value_counts())
+
+
+field    34
+bat      27
+----------------------------------------------------------------------------------------------------
+
