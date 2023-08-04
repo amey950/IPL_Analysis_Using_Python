@@ -85,7 +85,8 @@ Kings XI Punjab                28860
 
 12) FIND THE PLAYERS WHO HAVE SCORED CENTURY ALSO POST THE SCORES
 
-df_p.groupby(['id','batsman'])['batsman_runs'].sum()
+a = df_p.groupby(['id','batsman','date'])['batsman_runs'].sum()
+a[a.values >= 100].sort_values(ascending =  False)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -194,5 +195,9 @@ k = aa['V Kohli']
 k[k.values > 90].count()
 
 /* HERE WE CAN CHANGE THE NAME OF BATSMAN AND CHANGE THE SCORE , IT IS JUST REPLACEMENT IN ABOVE CODE */ 
+
+----------------------------------------------------------------------
+
+Q) 
 
 
