@@ -187,3 +187,74 @@ field    34
 bat      27
 ----------------------------------------------------------------------------------------------------
 
+Q) FINS THE DISTINCT TOP 5 FIRST UNPIRES WHO HAVE SERVED IN MAXIMUM NUMBER OF MATCHES
+
+df_p['umpire1'].value_counts(ascending = False).head(5)   
+
+----------------------------------------------------------------------------------------------------
+
+Q) WRITE A CODE TO FIND HOW MANY MATCHES HAVE WON BY MUMBAI WHEN PLAYED AGAINS KOLKATA
+
+a = df_p[((df_p['team1'] == 'Mumbai Indians') & (df_p['team2'] == 'Kolkata Knight Riders')) |
+((df_p['team2'] == 'Mumbai Indians') & (df_p['team1'] == 'Kolkata Knight Riders'))]
+
+print(a['winner'].value_counts()) ;
+
+Mumbai Indians           21
+Kolkata Knight Riders     6
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE WINNING PERCENTAGE OF MUMBAI INDIANS WHEN PLAYING AGAINST KOLKATA
+
+a = df_p[((df_p['team1'] == 'Mumbai Indians') & (df_p['team2'] == 'Kolkata Knight Riders')) |
+((df_p['team2'] == 'Mumbai Indians') & (df_p['team1'] == 'Kolkata Knight Riders'))]
+
+b = a['winner'].value_counts()['Mumbai Indians']  ;
+
+print(b/len(a)*100                   /* 77 percent winning rate of mumbai against kolkata */
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 5 spots where mumbai has won maximum matches
+
+a = df_p[df_p['winner'] == 'Mumbai Indians']
+a[['city','venue']].value_counts().head(5)
+
+Mumbai     Wankhede Stadium                             42
+Kolkata    Eden Gardens                                 10
+Bangalore  M Chinnaswamy Stadium                         8
+Hyderabad  Rajiv Gandhi International Stadium, Uppal     7
+Mumbai     Brabourne Stadium                             6
+
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 3 TEAMS WHICH HAVE WON BY THE RUNS
+
+a = df_p[df_p['result'] == 'runs']
+a['winner'].value_counts().head(3)
+
+Mumbai Indians           62
+Chennai Super Kings      53
+Kolkata Knight Riders    41      /* THESE TEAMS ARE STOPPING OTHER TEAM FROM CHASING THE TARGET */
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE WINNING PERCENTAGE OF mumbai Indians while winning the match by runs
+
+a = df_p[df_p['winner'] == 'Mumbai Indians']
+b = a['result'].value_counts()['runs']
+
+print(b/len(a)*100)    /* it is 51.67 , means it is quite balanced */ 
+----------------------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 3 TEAMS WHICH HAVE WON MATCHES BY RUNS LESS THAN 10 
+
+a = df_p[(df_p['result_margin'] < 10) & (df_p['result'] == 'runs')]
+print(a['winner'].value_counts().head(3)) ;
+
+Kings XI Punjab        13
+Mumbai Indians         13
+Sunrisers Hyderabad     9
+----------------------------------------------------------------------------------------------------
+
+
+
+
