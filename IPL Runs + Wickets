@@ -186,7 +186,7 @@ aa['V Kohli']
 
 /* here in 2nd line you can replace name of any player and answer will be present */
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 
 Q)  WRITE A CODE TO FIND THE HOW MANY TIME KOHLI HAS SCORED MORE THAN 90 RUNS
 
@@ -196,8 +196,33 @@ k[k.values > 90].count()
 
 /* HERE WE CAN CHANGE THE NAME OF BATSMAN AND CHANGE THE SCORE , IT IS JUST REPLACEMENT IN ABOVE CODE */ 
 
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
-Q) 
+Q) WRITE A QUERY TO FIND BATSMAN AND NUMBER OF CENTURIES SCORED.
 
+a = df_p.groupby(['id','batsman','date'])['batsman_runs'].sum()
+b = a[a.values >= 100].sort_values(ascending =  False)
+b.to_frame(name=None).value_counts('batsman').head(5)
 
+CH Gayle            6
+V Kohli             5
+DA Warner           4
+SR Watson           4
+AB de Villiers      3
+
+-------------------------------------------------------------------------------------
+
+Q) WRITE A QUERY TO FIND THE 5 TYPES OF GETTING OUT
+
+df_p['dismissal_type].value_counts().head(5)
+-------------------------------------------------------------------------------------
+Q) FIND THE TOP 5 PLAYERS WHO GOT OUT BY RUN-OUT 
+
+df_p[df_p['dismissal_kind'] == 'run out'].value_counts('batsman').head(10)
+
+MS Dhoni      22
+RG Sharma     20
+KD Karthik    17
+S Dhawan      15
+V Kohli       15
+-------------------------------------------------------------------------------------
