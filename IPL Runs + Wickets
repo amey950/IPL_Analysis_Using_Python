@@ -242,7 +242,7 @@ b.head(5)
 
 Q) FIND THE HIGHEST 5 INNINGS OF Royal Challengers Bangalore
 
-a = df_p[df_p['batting_team'] == 'Royal Challengers Bangalore']
+a = df_p[df_p['batting_team'] == 'Royal Challengers Bangalore']          /* HERE YOU CAN REPLACE NAME OF TEAM AND GET SCORES FOR ANOTHER */
 a.groupby(['id', 'inning'])['total_runs'].sum().sort_values(ascending = False)
 
 598027   1         263
@@ -252,4 +252,97 @@ a.groupby(['id', 'inning'])['total_runs'].sum().sort_values(ascending = False)
 829785   1         226
 -------------------------------------------------------------------------------------
 
-Q) 
+Q) FIND THE LIST OF ALL THE CENTURIES SCORED IN 2ND INNINGS
+
+a = df_p[df_p['inning'] == 2]
+b = a.groupby(['id', 'batsman','bowling_team'])['batsman_runs'].sum().sort_values(ascending = False)
+b[b.values >= 100]
+
+501206   PC Valthaty       Chennai Super Kings            120
+501243   V Sehwag          Deccan Chargers                119
+1136620  SR Watson         Sunrisers Hyderabad            117
+336018   ST Jayasuriya     Chennai Super Kings            114
+419139   DPMD Jayawardene  Kolkata Knight Riders          110
+335994   AC Gilchrist      Mumbai Indians                 109
+548329   DA Warner         Deccan Chargers                109
+980921   Q de Kock         Royal Challengers Bangalore    108
+980969   V Kohli           Rising Pune Supergiants        108
+1216541  BA Stokes         Mumbai Indians                 107
+548321   KP Pietersen      Deccan Chargers                103
+1082629  BA Stokes         Gujarat Lions                  103
+501222   CH Gayle          Kolkata Knight Riders          102
+1216509  S Dhawan          Chennai Super Kings            101
+598064   DA Miller         Royal Challengers Bangalore    101
+734025   LMP Simmons       Kings XI Punjab                100
+419107   YK Pathan         Mumbai Indians                 100
+1136606  AT Rayudu         Sunrisers Hyderabad            100
+
+-------------------------------------------------------------------------------------
+
+Q) FIND THE NUMBER OF GAMES PLAYED BY EACH TEAM , FETCH THE 5 TEAMS WITH LEAST GAMES
+
+df_p.groupby('batting_team')['id'].nunique().sort_values(ascending = False).tail(5)
+
+Delhi Capitals             33
+Gujarat Lions              30
+Rising Pune Supergiant     16
+Kochi Tuskers Kerala       14
+Rising Pune Supergiants    14
+
+-------------------------------------------------------------------------------------
+
+Q) FIND TOP 5 HIGHEST SCORES MADE IN 2ND INNING
+
+a = df_p[df_p['inning'] == 2]
+a.groupby(['id','batting_team','bowling_team'])['total_runs'].sum().sort_values(ascending = False).head(5)
+
+1216527  Rajasthan Royals  Kings XI Punjab        226
+1082641  Mumbai Indians    Kings XI Punjab        223
+419137   Rajasthan Royals  Chennai Super Kings    223
+335990   Rajasthan Royals  Deccan Chargers        217
+1082632  Delhi Daredevils  Gujarat Lions          214
+
+--------------------------------------------------------------------------------------
+
+Q) FIND THE  BATSMAN WHO HAVE GOT OUT BY STUMPED OUT
+
+a = df_p[df_p['dismissal_kind'] == 'stumped']
+a.value_counts('batsman').head()
+
+SK Raina          8
+AT Rayudu         7
+RV Uthappa        7
+AB de Villiers    6
+F du Plessis      6
+
+--------------------------------------------------------------------------------------
+
+Q) BOWLER WHO HAVE TAKEN MAXIMUM WICKETS BY BOLD
+
+a = df_p[df_p['dismissal_kind'] == 'stumped']
+a[['bowler']].value_counts().head()
+
+A Mishra            27
+Harbhajan Singh     18
+PP Chawla           16
+YS Chahal           13
+PP Ojha             12
+
+--------------------------------------------------------------------------------------
+
+Q) CREATE A STRUCTURE LIKE ID | RUNS FOR V KOHLI , SO THAT YOU CAN FURTHER ANALYZE IT
+
+a = df_p[df_p['batsman'] == 'V Kohli']
+b = a.groupby('id')['batsman_runs'].sum()
+c = b.values
+c.sum()                                    --- FOR TOTAL RUNS
+c.shape[0]   -- total innings
+c.max()
+c.min()
+c[c == 0]     --- innings where score = 0
+len(c[c == 0])   --- total times his score was 0
+b.descibe()     --- median and other things
+--------------------------------------------------------------------------------------
+
+
+
