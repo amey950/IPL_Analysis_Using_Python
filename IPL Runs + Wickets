@@ -343,6 +343,14 @@ c[c == 0]     --- innings where score = 0
 len(c[c == 0])   --- total times his score was 0
 b.descibe()     --- median and other things
 --------------------------------------------------------------------------------------
+Q) FIND THE DIFFERENCE BETWEEN FIRST INNING TOTAL RUNS AND SECOND INNING TOTAL RUNS OF V KOHLI
 
+first = df_p[(df_p['batsman'] == 'V Kohli') & (df_p['inning'] == 1)]
+second = df_p[(df_p['batsman'] == 'V Kohli') & (df_p['inning'] == 2)]
+first['batsman_runs'].sum() - second['batsman_runs'].sum()
+
+--------------------------------------------------------------------------------------
+
+Q) 
 
 
