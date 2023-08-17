@@ -226,3 +226,30 @@ KD Karthik    17
 S Dhawan      15
 V Kohli       15
 -------------------------------------------------------------------------------------
+
+Q) FIND THE TOP 10 SCORES BY TEAM IN AN INNINGS
+
+a = df_p.groupby(['id','inning','batting_team'])['total_runs'].sum()
+b = a[a.values >= 200].sort_values(ascending =  False)
+b.head(5)
+
+598027   1       Royal Challengers Bangalore    263
+980987   1       Royal Challengers Bangalore    248
+419137   1       Chennai Super Kings            246
+1136604  1       Kolkata Knight Riders          245
+335983   1       Chennai Super Kings            240
+-------------------------------------------------------------------------------------
+
+Q) FIND THE HIGHEST 5 INNINGS OF Royal Challengers Bangalore
+
+a = df_p[df_p['batting_team'] == 'Royal Challengers Bangalore']
+a.groupby(['id', 'inning'])['total_runs'].sum().sort_values(ascending = False)
+
+598027   1         263
+980987   1         248
+829795   1         235
+980907   1         227
+829785   1         226
+-------------------------------------------------------------------------------------
+
+Q) 
