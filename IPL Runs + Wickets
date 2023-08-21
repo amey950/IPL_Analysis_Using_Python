@@ -351,6 +351,13 @@ first['batsman_runs'].sum() - second['batsman_runs'].sum()
 
 --------------------------------------------------------------------------------------
 
+Q) WRITE A SCRIPT TO FIND THE IPL MATCHES WHERE MATVCH HAS EXACT 240 BALLS
+
+a = df_p.groupby('id')['id'].count()
+a[a.values == 240].count()
+
+--------------------------------------------------------------------------------------
+
 Q) 
 
 
