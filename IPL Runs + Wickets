@@ -358,6 +358,26 @@ a[a.values == 240].count()
 
 --------------------------------------------------------------------------------------
 
-Q) 
+Q) WRITE A CODE TO FIND TOP 10 BATSMAN AND NUMBER OF MATCHES PLAYED BY THESE PLAYERS
+
+matches = df_p.groupby(['batsman'])['id'].nunique()
+runs = df_p.groupby(['batsman'])['batsman_runs'].sum()
+
+new = pd.concat([matches,runs],axis=1)                                      /* joining 2 series */
+a = new.sort_values(by = ['batsman_runs'] , ascending = [False]).head(10)
+a
+
+V Kohli	184	5878
+SK Raina	189	5368
+DA Warner	142	5254
+RG Sharma	194	5230
+S Dhawan	175	5197
+AB de Villiers	156	4849
+CH Gayle	131	4772
+MS Dhoni	182	4632
+RV Uthappa	182	4607
+G Gambhir	151	4217
+
+--------------------------------------------------------------------------------------
 
 
